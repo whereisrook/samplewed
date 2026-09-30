@@ -1,74 +1,82 @@
-// 1. Navigation Between Pages
-function navigateTo(targetPageId) {
-  const activePage = document.querySelector('.page-screen.active');
-  const targetPage = document.getElementById(targetPageId);
+// 1. Navigation Controller
+function navigateTo(pageId) {
+  const activePage = document.querySelector('.page-view.active');
+  const targetPage = document.getElementById(pageId);
 
   if (activePage) {
     activePage.classList.remove('active');
   }
+  
   targetPage.classList.add('active');
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// 2. Realistic Envelope Open Animation
-function handleOpenEnvelope() {
-  const wrapper = document.getElementById('envelopeWrapper');
-  wrapper.classList.add('open');
+function scrollToSection(sectionId) {
+  const element = document.getElementById(sectionId);
+  if (element) {
+    element.scrollIntoView({ behavior: 'smooth' });
+  }
+}
 
-  // Waits 1 second for the flap and letter slide up before switching to page 2
+// 2. Envelope 3D Open Interaction
+function unsealEnvelope() {
+  const envelope = document.getElementById('envelope3D');
+  envelope.classList.add('unsealed');
+
+  // Smooth cinematic delay before revealing the full site
   setTimeout(() => {
     navigateTo('page-main');
-  }, 1000);
+  }, 1300);
 }
 
-// 3. Carousel Component Logic
-let currentSlide = 0;
-const totalSlides = 3;
+// 3. Full-Screen Hero Carousel (Wedvite Style)
+let activeIndex = 0;
+const slides = document.querySelectorAll('.carousel-slide');
+const indicators = document.querySelectorAll('.indicator-bar');
+const totalSlides = slides.length;
+let autoCarouselTimer;
 
-function updateCarousel() {
-  const track = document.getElementById('carouselTrack');
-  track.style.transform = `translateX(-${currentSlide * 100}%)`;
-
-  const dots = document.querySelectorAll('.carousel-dots .dot');
-  dots.forEach((dot, index) => {
-    dot.classList.toggle('active', index === currentSlide);
+function showSlide(index) {
+  slides.forEach((slide, i) => {
+    slide.classList.toggle('active-slide', i === index);
   });
+
+  indicators.forEach((bar, i) => {
+    bar.classList.toggle('active', i === index);
+  });
+
+  activeIndex = index;
 }
 
-function moveCarousel(direction) {
-  currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
-  updateCarousel();
+function shiftSlide(direction) {
+  let nextIndex = (activeIndex + direction + totalSlides) % totalSlides;
+  showSlide(nextIndex);
+  resetTimer();
 }
 
-function setSlide(index) {
-  currentSlide = index;
-  updateCarousel();
+function resetTimer() {
+  clearInterval(autoCarouselTimer);
+  autoCarouselTimer = setInterval(() => {
+    shiftSlide(1);
+  }, 5500);
 }
 
-// Auto-slide every 4.5 seconds
-setInterval(() => {
-  moveCarousel(1);
-}, 4500);
+// Start auto rotation
+resetTimer();
 
 // 4. GCash Modal Controls
-function toggleGcashModal(show) {
+function toggleGcash(state) {
   const modal = document.getElementById('gcashModal');
-  if (show) {
+  if (state) {
     modal.classList.add('open');
   } else {
     modal.classList.remove('open');
   }
 }
 
-function copyNumber() {
-  const num = document.getElementById('gcashNumber').innerText;
-  navigator.clipboard.writeText(num).then(() => {
+function copyGcash() {
+  const number = document.getElementById('gcashNumText').innerText;
+  navigator.clipboard.writeText(number).then(() => {
     alert("GCash number copied!");
   });
-}
-
-// 5. RSVP Form Preview Handler
-function handleFormPreview(e) {
-  e.preventDefault();
-  alert("RSVP submitted in preview mode! (Ready for Google Sheets connection whenever you want).");
 }
