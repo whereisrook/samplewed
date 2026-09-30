@@ -2,234 +2,310 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Our Wedding Celebration</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <title>The Wedding Celebration</title>
 
-  <!-- Elegant Fonts -->
+  <!-- Editorial Luxury Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Italiana&family=Plus+Jakarta+Sans:wght@200;300;400;500;600&display=swap" rel="stylesheet">
 
-  <!-- Link to your separate style.css file -->
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <div class="app-viewport">
+  <!-- ==============================================
+       PAGE 1: CINEMATIC ENVELOPE UNSEALING
+       ============================================== -->
+  <section id="page-envelope" class="page-view active">
+    <div class="envelope-ambient-bg"></div>
+    
+    <div class="envelope-stage">
+      <div class="invitation-crest">S & C</div>
+      <p class="envelope-tagline">AN INVITATION TO CELEBRATE</p>
 
-    <!-- PAGE 1: ENVELOPE OPENING -->
-    <section id="page-envelope" class="page-screen active">
-      <div class="envelope-screen">
-        <h1 class="monogram-header">Together</h1>
-        <p class="envelope-subtitle">A Wedding Invitation</p>
-
-        <div class="envelope-wrapper" id="envelopeWrapper" onclick="handleOpenEnvelope()">
-          <div class="envelope-back"></div>
-          <div class="letter-sheet">
-            <p>You are warmly invited</p>
+      <div class="envelope-box" id="envelope3D" onclick="unsealEnvelope()">
+        <div class="flap-top" id="flapTop"></div>
+        <div class="envelope-pocket"></div>
+        
+        <!-- The Letter that slides out -->
+        <div class="letter-card" id="letterCard">
+          <div class="letter-inner">
+            <span class="letter-monogram">S & C</span>
+            <h3>Together with their families</h3>
+            <p class="invitee-line">request the honour of your presence</p>
+            <div class="mini-gold-divider"></div>
+            <p class="tap-open-prompt">Entering the celebration...</p>
           </div>
-          <div class="envelope-pocket"></div>
-          <div class="envelope-flap"></div>
-          <div class="wax-seal">✦</div>
         </div>
 
-        <p class="tap-hint">✉️ Tap the seal to open</p>
-      </div>
-    </section>
-
-    <!-- PAGE 2: INVITATION, CAROUSEL, RSVP, GIFTS -->
-    <section id="page-main" class="page-screen">
-      
-      <header class="hero-banner">
-        <p class="wedding-date">Save Our Date</p>
-        <h1 class="wedding-title">Sean & Ceejay</h1>
-        <p class="wedding-date">December 18, 2026</p>
-      </header>
-
-      <!-- Main Photo Placeholder -->
-      <div class="photo-slot">
-        <span>[ Top Couple Portrait Image Slot ]</span>
-      </div>
-
-      <!-- Carousel Section -->
-      <div class="carousel-section">
-        <h2 class="section-headline">Captured Moments</h2>
-        <p class="section-subtext">SWIPE THROUGH OUR MEMORIES</p>
-
-        <div class="carousel-container">
-          <div class="carousel-track" id="carouselTrack">
-            <div class="carousel-slide">
-              <span>[ Carousel Photo 1: Pre-nup Shot ]</span>
-            </div>
-            <div class="carousel-slide">
-              <span>[ Carousel Photo 2: Date Memory ]</span>
-            </div>
-            <div class="carousel-slide">
-              <span>[ Carousel Photo 3: Sunset Walk ]</span>
-            </div>
-          </div>
-          <button class="carousel-btn prev" onclick="moveCarousel(-1)">&larr;</button>
-          <button class="carousel-btn next" onclick="moveCarousel(1)">&rarr;</button>
-        </div>
-
-        <div class="carousel-dots" id="carouselDots">
-          <span class="dot active" onclick="setSlide(0)"></span>
-          <span class="dot" onclick="setSlide(1)"></span>
-          <span class="dot" onclick="setSlide(2)"></span>
+        <!-- 3D Wax Seal with Realistic Texture -->
+        <div class="seal-button" id="waxSeal">
+          <div class="seal-emboss">✦</div>
         </div>
       </div>
 
-      <!-- RSVP Card -->
-      <div class="dream-card">
-        <h2 class="section-headline">Kindly RSVP</h2>
-        <p class="section-subtext">CELEBRATE THIS DAY WITH US</p>
+      <p class="open-instruction">TAP WAX SEAL TO OPEN</p>
+    </div>
+  </section>
 
-        <form onsubmit="handleFormPreview(event)">
-          <div class="form-group">
-            <label>Your Full Name</label>
-            <input type="text" class="input-field" placeholder="e.g. Maria Santos" required />
+
+  <!-- ==============================================
+       PAGE 2: EDITORIAL MAIN PAGE (FULL-SCREEN CAROUSEL)
+       ============================================== -->
+  <section id="page-main" class="page-view">
+    
+    <!-- Floating Bottom Nav Bar (Wedvite style) -->
+    <nav class="floating-nav">
+      <button class="nav-pill active" onclick="scrollToSection('hero-carousel')">Moments</button>
+      <button class="nav-pill" onclick="scrollToSection('section-rsvp')">RSVP</button>
+      <button class="nav-pill" onclick="scrollToSection('section-gifting')">Gifting</button>
+      <button class="nav-pill" onclick="navigateTo('page-details')">Details &rarr;</button>
+    </nav>
+
+    <!-- FULL SCREEN HERO CAROUSEL -->
+    <header id="hero-carousel" class="full-screen-carousel">
+      <div class="carousel-track" id="mainCarouselTrack">
+        
+        <!-- Slide 1 -->
+        <div class="carousel-slide active-slide">
+          <div class="slide-media-placeholder">
+            <div class="placeholder-content">
+              <span class="ph-icon">✦</span>
+              <p class="ph-title">[ Full-Screen Pre-nup Portrait 1 ]</p>
+              <p class="ph-desc">Replace with your high-res background image in assets/</p>
+            </div>
+          </div>
+          <div class="slide-overlay">
+            <span class="editorial-eyebrow">THE WEDDING OF</span>
+            <h1 class="editorial-names">Sean & Ceejay</h1>
+            <p class="editorial-date">DECEMBER 18, 2026 &bull; SUNSET CEREMONY</p>
+          </div>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="carousel-slide">
+          <div class="slide-media-placeholder slide-bg-2">
+            <div class="placeholder-content">
+              <span class="ph-icon">✦</span>
+              <p class="ph-title">[ Full-Screen Landscape / Sunset Photo 2 ]</p>
+              <p class="ph-desc">Full 100vh visual display</p>
+            </div>
+          </div>
+          <div class="slide-overlay">
+            <span class="editorial-eyebrow">OUR STORY</span>
+            <h2 class="editorial-names quote-style">"From this day forward, into forever."</h2>
+          </div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="carousel-slide">
+          <div class="slide-media-placeholder slide-bg-3">
+            <div class="placeholder-content">
+              <span class="ph-icon">✦</span>
+              <p class="ph-title">[ Full-Screen Candid / Pre-nup Photo 3 ]</p>
+              <p class="ph-desc">Full 100vh visual display</p>
+            </div>
+          </div>
+          <div class="slide-overlay">
+            <span class="editorial-eyebrow">THE DESTINATION</span>
+            <h2 class="editorial-names">Glasshouse Conservatory</h2>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Carousel Navigation Elements -->
+      <div class="carousel-arrows">
+        <button class="arrow-btn" onclick="shiftSlide(-1)">&#10229;</button>
+        <button class="arrow-btn" onclick="shiftSlide(1)">&#10230;</button>
+      </div>
+
+      <!-- Progress Line Indicator -->
+      <div class="carousel-indicators" id="carouselIndicators">
+        <div class="indicator-bar active"><span class="bar-progress"></span></div>
+        <div class="indicator-bar"><span class="bar-progress"></span></div>
+        <div class="indicator-bar"><span class="bar-progress"></span></div>
+      </div>
+
+      <div class="scroll-down-hint">
+        <span class="mouse-icon"></span>
+        SCROLL TO EXPLORE
+      </div>
+    </header>
+
+
+    <!-- RSVP SECTION (Editorial Glassmorphism) -->
+    <div class="page-content-wrapper">
+      <section id="section-rsvp" class="editorial-card">
+        <div class="card-header">
+          <span class="section-label">ATTENDANCE</span>
+          <h2 class="card-title">Kindly Confirm</h2>
+          <p class="card-subtitle">We would be thrilled to celebrate this milestone with you.</p>
+        </div>
+
+        <form class="luxury-form" onsubmit="event.preventDefault(); alert('RSVP submitted (preview mode)!');">
+          <div class="field-container">
+            <label>YOUR NAME(S)</label>
+            <input type="text" class="lux-input" placeholder="Guest Name(s)" required />
           </div>
 
-          <div class="form-group">
-            <label>Attendance</label>
-            <select class="input-field" required>
-              <option value="yes">Joyfully Accepts</option>
-              <option value="no">Regretfully Declines</option>
-            </select>
+          <div class="field-container">
+            <label>RESPONSE</label>
+            <div class="segmented-control">
+              <label class="segment">
+                <input type="radio" name="attend" value="yes" checked />
+                <span>Joyfully Accepts</span>
+              </label>
+              <label class="segment">
+                <input type="radio" name="attend" value="no" />
+                <span>Regretfully Declines</span>
+              </label>
+            </div>
           </div>
 
-          <div class="form-group">
-            <label>Number of Seats</label>
-            <input type="number" class="input-field" min="1" max="5" value="1" required />
+          <div class="field-container">
+            <label>TOTAL GUESTS ATTENDING</label>
+            <input type="number" class="lux-input" min="1" max="4" value="1" required />
           </div>
 
-          <div class="form-group">
-            <label>Note to the Couple</label>
-            <textarea class="input-field" rows="3" placeholder="Leave a warm wish or dietary note..."></textarea>
+          <div class="field-container">
+            <label>WISHES OR DIETARY RESTRICTIONS</label>
+            <textarea class="lux-input text-area" rows="3" placeholder="Leave a message for the couple..."></textarea>
           </div>
 
-          <button type="submit" class="dream-btn">Send RSVP</button>
+          <button type="submit" class="lux-btn-primary">SUBMIT RSVP</button>
         </form>
-      </div>
+      </section>
 
-      <!-- Gifting Card -->
-      <div class="dream-card">
-        <h2 class="section-headline">Gift Registry</h2>
-        <p style="font-size: 0.85rem; line-height: 1.6; color: #666; text-align: center; margin-bottom: 15px;">
-          With all that we have, we’ve been truly blessed. Your presence and prayers are all that we request. But if you desire to give nonetheless, a monetary gift to our future would be warmly cherished.
-        </p>
+      <!-- GIFTING & MONETARY DONATIONS -->
+      <section id="section-gifting" class="editorial-card">
+        <div class="card-header">
+          <span class="section-label">REGISTRY</span>
+          <h2 class="card-title">A Wishing Well</h2>
+          <p class="gifting-text">
+            Your love and prayers are the greatest gift we could ever ask for. However, should you wish to bless us further, a monetary gift to support our new home and future journey together would be warmly appreciated.
+          </p>
+        </div>
 
-        <button class="gcash-trigger" onclick="toggleGcashModal(true)">
-          <span>💸</span> Send Monetary Gift via GCash
+        <button class="gcash-luxury-button" onclick="toggleGcash(true)">
+          <div class="gcash-logo-icon">G</div>
+          <span>GIFT VIA GCASH</span>
+        </button>
+      </section>
+
+      <!-- DETAIL PAGE TRIGGER -->
+      <div class="next-page-callout">
+        <p>LOOKING FOR DRESS CODE, LOCATION & TIMELINE?</p>
+        <button class="editorial-link-btn" onclick="navigateTo('page-details')">
+          VIEW EVENT DETAILS & ATTIRE &rarr;
         </button>
       </div>
+    </div>
+  </section>
 
-      <!-- Button leading to Details -->
-      <button class="details-nav-button" onclick="navigateTo('page-details')">
-        View Itinerary, Attire & Venue Details &rarr;
+
+  <!-- ==============================================
+       PAGE 3: WEDDING DETAILS, ATTIRE, SCHEDULE
+       ============================================== -->
+  <section id="page-details" class="page-view">
+    <div class="details-screen-inner">
+      <button class="editorial-back" onclick="navigateTo('page-main')">
+        &larr; BACK TO INVITATION
       </button>
 
-    </section>
+      <div class="card-header">
+        <span class="section-label">CELEBRATION DETAILS</span>
+        <h2 class="card-title">The Wedding Day</h2>
+      </div>
 
-    <!-- PAGE 3: DETAILS, TIMELINE, ATTIRE -->
-    <section id="page-details" class="page-screen">
-      <button class="back-nav" onclick="navigateTo('page-main')">
-        &larr; Back to Invitation
-      </button>
-
-      <div class="dream-card">
-        <h2 class="section-headline">Wedding Itinerary</h2>
-        <p class="section-subtext">SCHEDULE OF EVENTS</p>
-
-        <div class="timeline-item">
-          <div class="timeline-time">2:00 PM</div>
-          <div class="timeline-info">
-            <h4>Solemn Ceremony</h4>
-            <p>Our Lady of the Miraculous Medal Chapel</p>
+      <!-- Timeline -->
+      <div class="timeline-luxury">
+        <div class="timeline-row">
+          <div class="tl-hour">2:00 PM</div>
+          <div class="tl-body">
+            <h4>THE CEREMONY</h4>
+            <p>Our Lady of the Miraculous Medal Sanctuary</p>
           </div>
         </div>
 
-        <div class="timeline-item">
-          <div class="timeline-time">4:00 PM</div>
-          <div class="timeline-info">
-            <h4>Cocktails & Sunset Photos</h4>
-            <p>Glasshouse Pavilion Gardens</p>
+        <div class="timeline-row">
+          <div class="tl-hour">4:30 PM</div>
+          <div class="tl-body">
+            <h4>COCKTAILS & SUNSET</h4>
+            <p>The Veranda & Garden Promenade</p>
           </div>
         </div>
 
-        <div class="timeline-item">
-          <div class="timeline-time">6:00 PM</div>
-          <div class="timeline-info">
-            <h4>Dinner & Celebration</h4>
-            <p>The Grand Conservatory Ballroom</p>
+        <div class="timeline-row">
+          <div class="tl-hour">6:00 PM</div>
+          <div class="tl-body">
+            <h4>DINNER & RECEPTION</h4>
+            <p>The Grand Ballroom Pavilion</p>
           </div>
         </div>
       </div>
 
       <!-- Attire & Color Palette -->
-      <div class="dream-card">
-        <h2 class="section-headline">Dress Code & Palette</h2>
-        <p class="section-subtext">FORMAL / MODERN FILIPINIANA & BARONG</p>
-        <p style="font-size: 0.82rem; text-align: center; color: #666;">
-          We warmly encourage our guests to celebrate in our curated tones:
-        </p>
+      <div class="editorial-card margin-top">
+        <span class="section-label">DRESS CODE</span>
+        <h3 class="card-title-sm">Formal / Modern Filipiniana & Barong</h3>
+        <p class="attire-note">We kindly invite you to celebrate in harmony with our neutral, earthy palette:</p>
 
-        <div class="swatches-grid">
-          <div class="swatch-circle" style="background: #e7dacd;" title="Warm Champagne"></div>
-          <div class="swatch-circle" style="background: #c5a593;" title="Blush Rose"></div>
-          <div class="swatch-circle" style="background: #8b9d83;" title="Sage Green"></div>
-          <div class="swatch-circle" style="background: #6c5a4d;" title="Earthy Taupe"></div>
+        <div class="palette-display">
+          <div class="palette-swatch" style="background: #e8ded4;"><span>Alabaster</span></div>
+          <div class="palette-swatch" style="background: #cbb49f;"><span>Warm Sand</span></div>
+          <div class="palette-swatch" style="background: #8b9982;"><span>Muted Sage</span></div>
+          <div class="palette-swatch" style="background: #5b4a3f;"><span>Deep Taupe</span></div>
         </div>
 
-        <div class="venue-photo-slot">
+        <!-- Attire Inspiration Slot -->
+        <div class="attire-image-slot">
           <span>[ Moodboard / Attire Inspiration Image Slot ]</span>
         </div>
-
-        <p style="font-size: 0.78rem; text-align: center; color: #888; font-style: italic;">
-          Kindly refrain from wearing all-white or casual slippers and denim.
-        </p>
       </div>
 
-      <!-- Venue & Map Placeholder -->
-      <div class="dream-card">
-        <h2 class="section-headline">The Venue</h2>
-        <p class="section-subtext">HOW TO GET THERE</p>
-
-        <div class="venue-photo-slot">
-          <span>[ Venue Map / Location Photo Slot ]</span>
+      <!-- Map & Location -->
+      <div class="editorial-card margin-top">
+        <span class="section-label">LOCATION</span>
+        <h3 class="card-title-sm">The Conservatory</h3>
+        <div class="attire-image-slot map-slot">
+          <span>[ Interactive Google Maps / Map Illustration Slot ]</span>
         </div>
-        <p style="font-size: 0.82rem; text-align: center; color: #666; margin-top: 10px;">
-          Valet and guest parking available at the lower atrium entrance.
-        </p>
+        <p class="attire-note">Valet parking is available at the entrance.</p>
       </div>
 
-      <button class="details-nav-button" onclick="navigateTo('page-main')">
-        &larr; Back to Top
-      </button>
-    </section>
+      <div class="center-btn">
+        <button class="editorial-link-btn" onclick="navigateTo('page-main')">
+          &larr; BACK TO TOP
+        </button>
+      </div>
+    </div>
+  </section>
 
-  </div>
 
-  <!-- GCASH MODAL POPUP -->
-  <div class="modal-overlay" id="gcashModal">
-    <div class="modal-card">
-      <button class="close-btn" onclick="toggleGcashModal(false)">&times;</button>
-      <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; color: #007dfe; margin-bottom: 4px;">GCash Gift</h3>
-      <p style="font-size: 0.8rem; color: #777;">Scan the QR code or copy our number</p>
-
-      <div class="qr-space">
-        <span>[ GCash QR Code Image Slot ]</span>
+  <!-- ==============================================
+       GCASH MODAL
+       ============================================== -->
+  <div class="modal-dim" id="gcashModal">
+    <div class="lux-modal">
+      <button class="close-x" onclick="toggleGcash(false)">&times;</button>
+      <span class="section-label">MONETARY BLESSING</span>
+      <h3 class="modal-head">GCash Transfer</h3>
+      
+      <div class="qr-presentation">
+        <div class="qr-canvas-placeholder">
+          <span>[ Your GCash QR Code Image Slot ]</span>
+        </div>
       </div>
 
-      <div class="copy-pill">
-        <span id="gcashNumber">0917-123-4567</span>
-        <button onclick="copyNumber()">Copy</button>
-      </div>
-      <p style="font-size: 0.75rem; color: #888; margin-top: 10px;">Account: S*** L.</p>
+      <p class="gcash-acc-num" id="gcashNumText">0917-123-4567</p>
+      <p class="gcash-holder">Account Name: <strong>S*** L.</strong></p>
+
+      <button class="copy-lux-btn" onclick="copyGcash()">COPY ACCOUNT NUMBER</button>
     </div>
   </div>
 
-  <!-- Link to your separate script.js file -->
   <script src="script.js"></script>
 </body>
 </html>
