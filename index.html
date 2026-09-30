@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Our Wedding Celebration</title>
+
+  <!-- Elegant Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
+
+  <!-- Link to your separate style.css file -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="app-viewport">
+
+    <!-- PAGE 1: ENVELOPE OPENING -->
+    <section id="page-envelope" class="page-screen active">
+      <div class="envelope-screen">
+        <h1 class="monogram-header">Together</h1>
+        <p class="envelope-subtitle">A Wedding Invitation</p>
+
+        <div class="envelope-wrapper" id="envelopeWrapper" onclick="handleOpenEnvelope()">
+          <div class="envelope-back"></div>
+          <div class="letter-sheet">
+            <p>You are warmly invited</p>
+          </div>
+          <div class="envelope-pocket"></div>
+          <div class="envelope-flap"></div>
+          <div class="wax-seal">✦</div>
+        </div>
+
+        <p class="tap-hint">✉️ Tap the seal to open</p>
+      </div>
+    </section>
+
+    <!-- PAGE 2: INVITATION, CAROUSEL, RSVP, GIFTS -->
+    <section id="page-main" class="page-screen">
+      
+      <header class="hero-banner">
+        <p class="wedding-date">Save Our Date</p>
+        <h1 class="wedding-title">Sean & Ceejay</h1>
+        <p class="wedding-date">December 18, 2026</p>
+      </header>
+
+      <!-- Main Photo Placeholder -->
+      <div class="photo-slot">
+        <span>[ Top Couple Portrait Image Slot ]</span>
+      </div>
+
+      <!-- Carousel Section -->
+      <div class="carousel-section">
+        <h2 class="section-headline">Captured Moments</h2>
+        <p class="section-subtext">SWIPE THROUGH OUR MEMORIES</p>
+
+        <div class="carousel-container">
+          <div class="carousel-track" id="carouselTrack">
+            <div class="carousel-slide">
+              <span>[ Carousel Photo 1: Pre-nup Shot ]</span>
+            </div>
+            <div class="carousel-slide">
+              <span>[ Carousel Photo 2: Date Memory ]</span>
+            </div>
+            <div class="carousel-slide">
+              <span>[ Carousel Photo 3: Sunset Walk ]</span>
+            </div>
+          </div>
+          <button class="carousel-btn prev" onclick="moveCarousel(-1)">&larr;</button>
+          <button class="carousel-btn next" onclick="moveCarousel(1)">&rarr;</button>
+        </div>
+
+        <div class="carousel-dots" id="carouselDots">
+          <span class="dot active" onclick="setSlide(0)"></span>
+          <span class="dot" onclick="setSlide(1)"></span>
+          <span class="dot" onclick="setSlide(2)"></span>
+        </div>
+      </div>
+
+      <!-- RSVP Card -->
+      <div class="dream-card">
+        <h2 class="section-headline">Kindly RSVP</h2>
+        <p class="section-subtext">CELEBRATE THIS DAY WITH US</p>
+
+        <form onsubmit="handleFormPreview(event)">
+          <div class="form-group">
+            <label>Your Full Name</label>
+            <input type="text" class="input-field" placeholder="e.g. Maria Santos" required />
+          </div>
+
+          <div class="form-group">
+            <label>Attendance</label>
+            <select class="input-field" required>
+              <option value="yes">Joyfully Accepts</option>
+              <option value="no">Regretfully Declines</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Number of Seats</label>
+            <input type="number" class="input-field" min="1" max="5" value="1" required />
+          </div>
+
+          <div class="form-group">
+            <label>Note to the Couple</label>
+            <textarea class="input-field" rows="3" placeholder="Leave a warm wish or dietary note..."></textarea>
+          </div>
+
+          <button type="submit" class="dream-btn">Send RSVP</button>
+        </form>
+      </div>
+
+      <!-- Gifting Card -->
+      <div class="dream-card">
+        <h2 class="section-headline">Gift Registry</h2>
+        <p style="font-size: 0.85rem; line-height: 1.6; color: #666; text-align: center; margin-bottom: 15px;">
+          With all that we have, we’ve been truly blessed. Your presence and prayers are all that we request. But if you desire to give nonetheless, a monetary gift to our future would be warmly cherished.
+        </p>
+
+        <button class="gcash-trigger" onclick="toggleGcashModal(true)">
+          <span>💸</span> Send Monetary Gift via GCash
+        </button>
+      </div>
+
+      <!-- Button leading to Details -->
+      <button class="details-nav-button" onclick="navigateTo('page-details')">
+        View Itinerary, Attire & Venue Details &rarr;
+      </button>
+
+    </section>
+
+    <!-- PAGE 3: DETAILS, TIMELINE, ATTIRE -->
+    <section id="page-details" class="page-screen">
+      <button class="back-nav" onclick="navigateTo('page-main')">
+        &larr; Back to Invitation
+      </button>
+
+      <div class="dream-card">
+        <h2 class="section-headline">Wedding Itinerary</h2>
+        <p class="section-subtext">SCHEDULE OF EVENTS</p>
+
+        <div class="timeline-item">
+          <div class="timeline-time">2:00 PM</div>
+          <div class="timeline-info">
+            <h4>Solemn Ceremony</h4>
+            <p>Our Lady of the Miraculous Medal Chapel</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-time">4:00 PM</div>
+          <div class="timeline-info">
+            <h4>Cocktails & Sunset Photos</h4>
+            <p>Glasshouse Pavilion Gardens</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-time">6:00 PM</div>
+          <div class="timeline-info">
+            <h4>Dinner & Celebration</h4>
+            <p>The Grand Conservatory Ballroom</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Attire & Color Palette -->
+      <div class="dream-card">
+        <h2 class="section-headline">Dress Code & Palette</h2>
+        <p class="section-subtext">FORMAL / MODERN FILIPINIANA & BARONG</p>
+        <p style="font-size: 0.82rem; text-align: center; color: #666;">
+          We warmly encourage our guests to celebrate in our curated tones:
+        </p>
+
+        <div class="swatches-grid">
+          <div class="swatch-circle" style="background: #e7dacd;" title="Warm Champagne"></div>
+          <div class="swatch-circle" style="background: #c5a593;" title="Blush Rose"></div>
+          <div class="swatch-circle" style="background: #8b9d83;" title="Sage Green"></div>
+          <div class="swatch-circle" style="background: #6c5a4d;" title="Earthy Taupe"></div>
+        </div>
+
+        <div class="venue-photo-slot">
+          <span>[ Moodboard / Attire Inspiration Image Slot ]</span>
+        </div>
+
+        <p style="font-size: 0.78rem; text-align: center; color: #888; font-style: italic;">
+          Kindly refrain from wearing all-white or casual slippers and denim.
+        </p>
+      </div>
+
+      <!-- Venue & Map Placeholder -->
+      <div class="dream-card">
+        <h2 class="section-headline">The Venue</h2>
+        <p class="section-subtext">HOW TO GET THERE</p>
+
+        <div class="venue-photo-slot">
+          <span>[ Venue Map / Location Photo Slot ]</span>
+        </div>
+        <p style="font-size: 0.82rem; text-align: center; color: #666; margin-top: 10px;">
+          Valet and guest parking available at the lower atrium entrance.
+        </p>
+      </div>
+
+      <button class="details-nav-button" onclick="navigateTo('page-main')">
+        &larr; Back to Top
+      </button>
+    </section>
+
+  </div>
+
+  <!-- GCASH MODAL POPUP -->
+  <div class="modal-overlay" id="gcashModal">
+    <div class="modal-card">
+      <button class="close-btn" onclick="toggleGcashModal(false)">&times;</button>
+      <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; color: #007dfe; margin-bottom: 4px;">GCash Gift</h3>
+      <p style="font-size: 0.8rem; color: #777;">Scan the QR code or copy our number</p>
+
+      <div class="qr-space">
+        <span>[ GCash QR Code Image Slot ]</span>
+      </div>
+
+      <div class="copy-pill">
+        <span id="gcashNumber">0917-123-4567</span>
+        <button onclick="copyNumber()">Copy</button>
+      </div>
+      <p style="font-size: 0.75rem; color: #888; margin-top: 10px;">Account: S*** L.</p>
+    </div>
+  </div>
+
+  <!-- Link to your separate script.js file -->
+  <script src="script.js"></script>
+</body>
+</html>
